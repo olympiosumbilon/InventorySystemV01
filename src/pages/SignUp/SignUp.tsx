@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../../supabaseClient";
-import Input from "../../components/Input";
 import { useNavigate } from "react-router-dom";
+import { signUpUser, saveUserProfile } from "../../services/auth";
 
 const SignUp = () => {
     const [email, setEmail] = useState('')
@@ -21,10 +21,10 @@ const SignUp = () => {
         setError('')
         setLoading(true)
 
-        const {data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        const {data: signUpData, error: signUpError } = await signUpUser(
             email,
             password,
-        })
+        )
 
         if(signUpError){
             setError(signUpError.message)
@@ -34,16 +34,15 @@ const SignUp = () => {
 
         const user = signUpData.user
         if(user){
-            const {error: profileError} = await supabase.from('tblprofile').insert([
+            const {error: profileError} = await saveUserProfile(user.id,
                 {
-                    tfuserid: user.id,
                     tfusername: username,
                     tfphone:phone,
                     tfrole:role,
                     tffull_name: fullName,
                     tfbusiness_name : businessName,
-                },
-            ])
+                }
+            )
 
             if(profileError){
                 console.error(profileError);
