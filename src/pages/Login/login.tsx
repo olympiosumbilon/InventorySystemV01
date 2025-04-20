@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/auth";
 import Input from "../../components/Input";
 
@@ -7,11 +8,18 @@ const Login = () =>{
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
         setLoading(true)
+
+        if(!email|| !password){
+            setError('Please fill in both email and password');
+            setLoading(false);
+            return;
+        }
 
         const {error} = await loginUser(
             email,
@@ -21,7 +29,7 @@ const Login = () =>{
         if(error){
             setError(error.message)
         }else{
-            alert('Logged in successfully')
+            navigate('/dashboard')
         }
         setLoading(false)
     }
@@ -35,8 +43,8 @@ const Login = () =>{
             >
                        <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
 
-            <Input label="Email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
-            <Input label="Password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
+            <Input label="Email" type="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
+            <Input label="Password" type="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
 
             {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
