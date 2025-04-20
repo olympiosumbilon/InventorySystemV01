@@ -1,11 +1,17 @@
 import './App.css'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Login from './pages/Login/Login'
+import SignUp from './pages/SignUp/SignUp'
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-500 text-white">
-      <h1 className="text-4xl font-bold">🎉 Tailwind is Working Network Test!</h1>
-    </div>
-  );
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login/>}/>
+          <Route path="/login" element={<Login/>}/>    
+          <Route path="/signup" element={<SignUp/>}/>
+        </Routes>
+      </Router>
+  )
 }
 
 export default App
