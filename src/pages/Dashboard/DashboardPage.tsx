@@ -5,7 +5,8 @@ const Dashboard = () =>{
             <li>Create Overview</li>
             <li>Create Navigation</li>
             <li>Create Process Flow</li>
-            <li>Create Menu Items</li>
+            <li>Create Menu Items</li> 
+            <li>Create Profile Settings</li> 
         </div>
     )
 }
