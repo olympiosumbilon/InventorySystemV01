@@ -45,6 +45,7 @@ const Login = () =>{
 
             <Input label="Email" type="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
             <Input label="Password" type="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
+            <p>Forgot Password?</p>
 
             {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
