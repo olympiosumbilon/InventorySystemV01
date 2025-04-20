@@ -1,26 +1,16 @@
 import './App.css'
-import { useEffect } from 'react'
-import {supabase} from './supabaseClient'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Login from './pages/Login/Login'
+import SignUp from './pages/SignUp/SignUp'
 function App() {
-  useEffect(() => {
-    const testConnection = async () => {
-      const { data, error } = await supabase.auth.getSession()
-
-      if (error) {
-        console.error('❌ Supabase Error:', error.message)
-      } else {
-        console.log('✅ Supabase connected! Session data:', data)
-      }
-    }
-
-    testConnection()
-  }, [])
-
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Login Page</h1>
-    </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login/>}/>
+          <Route path="/login" element={<Login/>}/>    
+          <Route path="/signup" element={<SignUp/>}/>
+        </Routes>
+      </Router>
   )
 }
 
