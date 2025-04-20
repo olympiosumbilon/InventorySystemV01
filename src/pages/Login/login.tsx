@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../../supabaseClient";
+import { loginUser } from "../../services/auth";
 import Input from "../../components/Input";
 
 const Login = () =>{
@@ -13,10 +13,10 @@ const Login = () =>{
         setError('')
         setLoading(true)
 
-        const {error} = await supabase.auth.signInWithPassword({
+        const {error} = await loginUser(
             email,
             password,
-        })
+        )
 
         if(error){
             setError(error.message)
