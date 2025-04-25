@@ -62,7 +62,7 @@ const menuItems = [
     { 
         name: 'Inventory', 
         icon: ShoppingCartIcon, 
-        path: '/inventory',
+        path: null,
         subItems: [
             { name: 'All Items', path: '/inventory/all' },
             { name: 'Categories', path: '/inventory/categories' },
