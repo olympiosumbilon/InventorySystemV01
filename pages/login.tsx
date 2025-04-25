@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { loginUser } from "../../services/auth";
-import Input from "../../components/Input";
+import { useRouter } from "next/router";
+import { loginUser } from "../services/auth";
+import Input from "../components/Input";
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
+    const router = useRouter()
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -29,7 +29,7 @@ const Login = () => {
         if(error){
             setError(error.message)
         }else{
-            navigate('/dashboard')
+            router.push('/dashboard')
         }
         setLoading(false)
     }
@@ -61,35 +61,13 @@ const Login = () => {
                             type="email" 
                             value={email} 
                             onChange={(e)=> setEmail(e.target.value)}
-                            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                         />
                         <Input 
                             label="Password" 
                             type="password" 
                             value={password} 
                             onChange={(e)=> setPassword(e.target.value)}
-                            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                         />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                            <input
-                                id="remember-me"
-                                name="remember-me"
-                                type="checkbox"
-                                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                            />
-                            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                Remember me
-                            </label>
-                        </div>
-
-                        <div className="text-sm">
-                            <Link to="/forgot-password" className="font-medium text-blue-600 hover:text-blue-500">
-                                Forgot your password?
-                            </Link>
-                        </div>
                     </div>
 
                     {error && (
@@ -128,19 +106,10 @@ const Login = () => {
                             {loading ? 'Signing in...' : 'Sign in'}
                         </button>
                     </div>
-
-                    <div className="text-center">
-                        <p className="text-sm text-gray-600">
-                            Don't have an account?{' '}
-                            <Link to="/signup" className="font-medium text-blue-600 hover:text-blue-500">
-                                Sign up
-                            </Link>
-                        </p>
-                    </div>
                 </form>
             </div>
         </div>
     )
 }
 
-export default Login
+export default Login 
